@@ -38,6 +38,7 @@ resource "statuscake_test" "google" {
   contact_id   = 12345
 }
 
+<<<<<<< HEAD
 resource "statuscake_ssl" "google" {
 	domain = "https://www.google.com"
 	contact_groups_c = "3,12"
@@ -49,6 +50,8 @@ resource "statuscake_ssl" "google" {
         alert_mixed = true
 }
 
+=======
+>>>>>>> master
 resource "statuscake_contact_group" "exemple" {
 	emails= ["email1","email2"]
         group_name= "group name"

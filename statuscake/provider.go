@@ -25,7 +25,10 @@ func Provider() terraform.ResourceProvider {
 
 		ResourcesMap: map[string]*schema.Resource{
 			"statuscake_test":          resourceStatusCakeTest(),
+<<<<<<< HEAD
 			"statuscake_ssl":           resourceStatusCakeSsl(),
+=======
+>>>>>>> master
 			"statuscake_contact_group": resourceStatusCakeContactGroup(),
 		},
 
