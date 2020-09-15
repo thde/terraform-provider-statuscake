@@ -2,8 +2,8 @@ package statuscake
 
 import (
 	"github.com/DreamItGetIT/statuscake"
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
 func Provider() terraform.ResourceProvider {
@@ -24,7 +24,9 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"statuscake_test": resourceStatusCakeTest(),
+			"statuscake_test":          resourceStatusCakeTest(),
+			"statuscake_ssl":           resourceStatusCakeSsl(),
+			"statuscake_contact_group": resourceStatusCakeContactGroup(),
 		},
 
 		ConfigureFunc: providerConfigure,

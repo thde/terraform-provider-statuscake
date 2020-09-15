@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
 var testAccProviders map[string]terraform.ResourceProvider
@@ -37,5 +37,8 @@ func testAccPreCheck(t *testing.T) {
 	}
 	if v := os.Getenv("STATUSCAKE_TEST_CONTACT_GROUP_ID"); v == "" {
 		t.Fatal("STATUSCAKE_TEST_CONTACT_GROUP_ID must be set for acceptance tests")
+	}
+	if v := os.Getenv("STATUSCAKE_SSL_CONTACT_GROUP_ID"); v == "" {
+		t.Fatal("STATUSCAKE_SSL_CONTACT_GROUP_ID must be set for acceptance tests")
 	}
 }
