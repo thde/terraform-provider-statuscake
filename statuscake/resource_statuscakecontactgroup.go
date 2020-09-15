@@ -3,10 +3,11 @@ package statuscake
 import (
 	"fmt"
 
-	"github.com/DreamItGetIT/statuscake"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strconv"
+
+	"github.com/DreamItGetIT/statuscake"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceStatusCakeContactGroup() *schema.Resource {

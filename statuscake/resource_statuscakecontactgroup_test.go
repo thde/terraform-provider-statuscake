@@ -2,11 +2,12 @@ package statuscake
 
 import (
 	"fmt"
-	"github.com/DreamItGetIT/statuscake"
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/terraform"
 	"strconv"
 	"testing"
+
+	"github.com/DreamItGetIT/statuscake"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
 func TestAccStatusCakeContactGroup_basic(t *testing.T) {
