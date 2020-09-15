@@ -3,7 +3,8 @@ layout: "statuscake"
 page_title: "Provider: StatusCake"
 sidebar_current: "docs-statuscake-index"
 description: |-
-  The StatusCake provider configures tests and in StatusCake.
+
+  The StatusCake provider configures tests and contact groups in StatusCake.
 ---
 
 # StatusCake Provider
@@ -47,4 +48,11 @@ resource "statuscake_ssl" "google" {
         alert_broken = false
         alert_mixed = true
 }
+
+resource "statuscake_contact_group" "exemple" {
+	emails= ["email1","email2"]
+        group_name= "group name"
+        ping_url= "url"
+}
+
 ```

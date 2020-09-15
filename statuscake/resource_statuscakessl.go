@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/DreamItGetIT/statuscake"
-	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	"strings"
+
+	"github.com/DreamItGetIT/statuscake"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
 func resourceStatusCakeSsl() *schema.Resource {

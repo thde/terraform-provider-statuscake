@@ -2,12 +2,13 @@ package statuscake
 
 import (
 	"fmt"
-	"github.com/DreamItGetIT/statuscake"
-	"github.com/hashicorp/terraform/helper/resource"
-	"github.com/hashicorp/terraform/terraform"
 	"os"
 	"strconv"
 	"testing"
+
+	"github.com/DreamItGetIT/statuscake"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
 func TestAccStatusCakeSsl_basic(t *testing.T) {
@@ -214,7 +215,7 @@ const testAccSslConfig_update = `
 resource "statuscake_ssl" "exemple" {
 	domain = "https://www.exemple.com"
         contact_groups_c = ""
-        checkrate = 86400 
+        checkrate = 86400
         alert_at = "18,81,2019"
         alert_reminder = false
 	alert_expiry = false
