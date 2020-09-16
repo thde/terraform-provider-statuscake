@@ -13,7 +13,7 @@ name: test
 on:
   push:
 jobs:
-  test:
+  provider:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,5 +26,16 @@ jobs:
         run: make test
       - name: Vet
         run: make vet
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14
       - name: Website Test
         run: make website-test
+        env:
+          GOPATH: ${{ env.HOME }}/go
