@@ -13,10 +13,10 @@ The contact_group resource allows StatusCake contact groups to be managed by Ter
 ## Example Usage
 
 ```hcl
-resource "statuscake_contact_group" "exemple" {
-	emails= ["email1","email2"]
-        group_name= "group name"
-        ping_url= "url"
+resource "statuscake_contact_group" "example" {
+  emails= ["email1","email2"]
+  group_name= "group name"
+  ping_url= "url"
 }
 ```
 
