@@ -16,12 +16,12 @@ The ssl resource allows StatusCake ssl tests to be managed by Terraform.
 resource "statuscake_ssl" "google" {
 	domain = "https://www.google.com"
 	contact_groups_c = "3,12"
-        checkrate = 3600
-        alert_at = "18,71,344"
-        alert_reminder = true
+	checkrate = 3600
+	alert_at = "18,71,344"
+	alert_reminder = true
 	alert_expiry = true
-        alert_broken = false
-        alert_mixed = true
+	alert_broken = false
+	alert_mixed = true
 }
 ```
 
