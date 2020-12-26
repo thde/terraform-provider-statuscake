@@ -136,12 +136,12 @@ func testAccTestCheckExists(rn string, test *statuscake.Test) resource.TestCheck
 		client := testAccProvider.Meta().(*statuscake.Client)
 		testID, parseErr := strconv.Atoi(rs.Primary.ID)
 		if parseErr != nil {
-			return fmt.Errorf("error in statuscake test CheckExists: %s", parseErr)
+			return fmt.Errorf("error in statuscake test CheckExists: %w", parseErr)
 		}
 
 		gotTest, err := client.Tests().Detail(testID)
 		if err != nil {
-			return fmt.Errorf("error getting test: %s", err)
+			return fmt.Errorf("error getting test: %w", err)
 		}
 
 		*test = *gotTest

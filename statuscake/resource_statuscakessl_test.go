@@ -73,7 +73,7 @@ func testAccSslCheckExists(rn string, ssl *statuscake.Ssl) resource.TestCheckFun
 		}
 
 		if rs.Primary.ID == "" {
-			return fmt.Errorf("SslID not set")
+			return fmt.Errorf("ssl ID not set")
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
@@ -81,7 +81,7 @@ func testAccSslCheckExists(rn string, ssl *statuscake.Ssl) resource.TestCheckFun
 
 		gotSsl, err := statuscake.NewSsls(client).Detail(sslId)
 		if err != nil {
-			return fmt.Errorf("error getting ssl: %s", err)
+			return fmt.Errorf("error getting ssl: %w", err)
 		}
 		gotSsl.LastUpdatedUtc = "0000-00-00 00:00:00" // quick fix to avoid issue with it because the state is updated before the value change but it is changed when gotSsl is created
 		*ssl = *gotSsl

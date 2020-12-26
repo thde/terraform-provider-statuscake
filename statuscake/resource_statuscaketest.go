@@ -279,7 +279,7 @@ func CreateTest(d *schema.ResourceData, meta interface{}) error {
 
 	response, err := client.Tests().Update(newTest)
 	if err != nil {
-		return fmt.Errorf("Error creating StatusCake Test: %s", err.Error())
+		return fmt.Errorf("error creating statuscake test: %w", err)
 	}
 
 	d.Set("test_id", fmt.Sprintf("%d", response.TestID))
@@ -298,7 +298,7 @@ func UpdateTest(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[DEBUG] StatusCake Test Update for %s", d.Id())
 	_, err := client.Tests().Update(params)
 	if err != nil {
-		return fmt.Errorf("Error Updating StatusCake Test: %s", err.Error())
+		return fmt.Errorf("error updating statuscake test: %w", err)
 	}
 	return nil
 }
@@ -328,7 +328,7 @@ func ReadTest(d *schema.ResourceData, meta interface{}) error {
 	}
 	testResp, err := client.Tests().Detail(testID)
 	if err != nil {
-		return fmt.Errorf("Error Getting StatusCake Test Details for %s: Error: %s", d.Id(), err)
+		return fmt.Errorf("error getting statuscake test details for %s: Error: %w", d.Id(), err)
 	}
 
 	if v, ok := d.GetOk("contact_group"); ok {
@@ -351,7 +351,7 @@ func ReadTest(d *schema.ResourceData, meta interface{}) error {
 	d.Set("status", testResp.Status)
 	d.Set("uptime", testResp.Uptime)
 	if err := d.Set("node_locations", considerEmptyStringAsEmptyArray(testResp.NodeLocations)); err != nil {
-		return fmt.Errorf("[WARN] Error setting node locations: %s", err)
+		return fmt.Errorf("error setting node locations: %w", err)
 	}
 	d.Set("logo_image", testResp.LogoImage)
 	// Even after WebsiteHost is set, the API returns ""

@@ -2,9 +2,8 @@ package statuscake
 
 import (
 	"fmt"
-	"strconv"
-
 	"log"
+	"strconv"
 	"strings"
 
 	"github.com/DreamItGetIT/statuscake"
@@ -167,7 +166,7 @@ func CreateSsl(d *schema.ResourceData, meta interface{}) error {
 
 	response, err := statuscake.NewSsls(client).Create(newSsl)
 	if err != nil {
-		return fmt.Errorf("Error creating StatusCake Ssl: %s", err.Error())
+		return fmt.Errorf("error creating statuscake Ssl: %s", err)
 	}
 
 	d.Set("ssl_id", response.ID)
@@ -215,7 +214,7 @@ func ReadSsl(d *schema.ResourceData, meta interface{}) error {
 
 	response, err := statuscake.NewSsls(client).Detail(d.Id())
 	if err != nil {
-		return fmt.Errorf("Error Getting StatusCake Ssl Details for %s: Error: %s", d.Id(), err)
+		return fmt.Errorf("error getting statuscake ssl details for %s: error: %s", d.Id(), err)
 	}
 	d.Set("domain", response.Domain)
 	d.Set("checkrate", response.Checkrate)

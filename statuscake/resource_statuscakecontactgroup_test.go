@@ -66,7 +66,7 @@ func testAccContactGroupCheckExists(rn string, contactGroup *statuscake.ContactG
 		}
 
 		if rs.Primary.ID == "" {
-			return fmt.Errorf("ContactGroupID not set")
+			return fmt.Errorf("contact_group.id not set")
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
@@ -74,7 +74,7 @@ func testAccContactGroupCheckExists(rn string, contactGroup *statuscake.ContactG
 
 		gotContactGroup, err := statuscake.NewContactGroups(client).Detail(contactGroupID)
 		if err != nil {
-			return fmt.Errorf("error getting ContactGroup: %s", err)
+			return fmt.Errorf("error getting contact_group: %w", err)
 		}
 
 		*contactGroup = *gotContactGroup

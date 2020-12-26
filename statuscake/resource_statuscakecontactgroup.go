@@ -74,7 +74,7 @@ func CreateContactGroup(d *schema.ResourceData, meta interface{}) error {
 
 	response, err := statuscake.NewContactGroups(client).Create(newContactGroup)
 	if err != nil {
-		return fmt.Errorf("Error creating StatusCake ContactGroup: %s", err.Error())
+		return fmt.Errorf("error creating statuscake contact group: %w", err)
 	}
 
 	d.Set("mobiles", newContactGroup.Mobiles)
@@ -107,7 +107,7 @@ func UpdateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	d.Set("pushover", params.Pushover)
 	d.Set("desktop_alert", params.DesktopAlert)
 	if err != nil {
-		return fmt.Errorf("Error Updating StatusCake ContactGroup: %s", err.Error())
+		return fmt.Errorf("error updating statuscake contact group: %w", err)
 	}
 	return ReadContactGroup(d, meta)
 }
@@ -126,7 +126,7 @@ func ReadContactGroup(d *schema.ResourceData, meta interface{}) error {
 	id, _ := strconv.Atoi(d.Id())
 	response, err := statuscake.NewContactGroups(client).Detail(id)
 	if err != nil {
-		return fmt.Errorf("error getting statuscake contact group details for %s: Error: %s", d.Id(), err)
+		return fmt.Errorf("error getting statuscake contact group details for %s: Error: %w", d.Id(), err)
 	}
 	d.Set("group_name", response.GroupName)
 	d.Set("emails", response.Emails)
