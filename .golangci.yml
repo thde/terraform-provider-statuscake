@@ -9,14 +9,14 @@ linters:
     - errcheck
     - exhaustive
     #- funlen
-    - gochecknoinits
+    #- gochecknoinits
     - goconst
     - gocritic
-    - gocyclo
+    #- gocyclo
     - gofmt
     - goimports
     - golint
-    - gomnd
+    #- gomnd
     - goprintffuncname
     - gosec
     - gosimple
@@ -35,7 +35,7 @@ linters:
     - stylecheck
     - typecheck
     - unconvert
-    - unparam
+    #- unparam
     - unused
     - varcheck
     - whitespace
