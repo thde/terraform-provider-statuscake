@@ -1,9 +1,5 @@
 ---
-layout: 'statuscake'
 page_title: 'StatusCake: statuscake_test'
-sidebar_current: 'docs-statuscake-test'
-description: |-
-  The statuscake_test resource allows StatusCake tests to be managed by Terraform.
 ---
 
 # statuscake_test

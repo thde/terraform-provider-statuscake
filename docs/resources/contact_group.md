@@ -1,9 +1,5 @@
 ---
-layout: 'statuscake'
 page_title: 'StatusCake: statuscake_contact_group'
-sidebar_current: 'docs-statuscake-contact_group'
-description: |-
-  The statuscake_contact_group resource allows StatusCake contact groups to be managed by Terraform.
 ---
 
 # statuscake_contact_group

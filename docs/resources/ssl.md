@@ -1,9 +1,5 @@
 ---
-layout: 'statuscake'
 page_title: 'StatusCake: statuscake_ssl'
-sidebar_current: 'docs-statuscake-ssl'
-description: |-
-  The statuscake_ssl resource allows StatusCake ssl tests to be managed by Terraform.
 ---
 
 # statuscake_ssl
