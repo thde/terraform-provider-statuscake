@@ -231,6 +231,7 @@ func resourceStatusCakeTest() *schema.Resource {
 	}
 }
 
+//nolint:errcheck
 func CreateTest(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
@@ -319,6 +320,7 @@ func DeleteTest(d *schema.ResourceData, meta interface{}) error {
 	return nil
 }
 
+//nolint:errcheck
 func ReadTest(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 

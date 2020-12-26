@@ -144,6 +144,7 @@ func resourceStatusCakeSsl() *schema.Resource {
 	}
 }
 
+//nolint:errcheck
 func CreateSsl(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
@@ -209,6 +210,7 @@ func DeleteSsl(d *schema.ResourceData, meta interface{}) error {
 	return err
 }
 
+//nolint:errcheck
 func ReadSsl(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 

@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
+//nolint:errcheck
 func resourceStatusCakeContactGroup() *schema.Resource {
 	return &schema.Resource{
 		Create: CreateContactGroup,
@@ -57,6 +58,7 @@ func resourceStatusCakeContactGroup() *schema.Resource {
 	}
 }
 
+//nolint:errcheck
 func CreateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
@@ -87,6 +89,7 @@ func CreateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	return ReadContactGroup(d, meta)
 }
 
+//nolint:errcheck
 func UpdateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
@@ -121,6 +124,7 @@ func DeleteContactGroup(d *schema.ResourceData, meta interface{}) error {
 	return err
 }
 
+//nolint:errcheck
 func ReadContactGroup(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 	id, _ := strconv.Atoi(d.Id())
