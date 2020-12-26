@@ -49,7 +49,7 @@ resource "statuscake_ssl" "google" {
   alert_mixed = true
 }
 
-resource "statuscake_contact_group" "exemple" {
+resource "statuscake_contact_group" "example" {
 	emails= ["email1","email2"]
   group_name= "group name"
   ping_url= "url"

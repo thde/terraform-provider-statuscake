@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-func TestAccStatusCakeContactGroup_basic(t *testing.T) {
+func TestAccStatusCakeContactGroupBasic(t *testing.T) {
 	var contactGroup statuscake.ContactGroup
 
 	resource.Test(t, resource.TestCase{
@@ -19,17 +19,17 @@ func TestAccStatusCakeContactGroup_basic(t *testing.T) {
 		CheckDestroy: testAccContactGroupCheckDestroy(&contactGroup),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccContactGroupConfig_basic,
+				Config: testAccContactGroupConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccContactGroupCheckExists("statuscake_contact_group.exemple", &contactGroup),
-					testAccContactGroupCheckAttributes("statuscake_contact_group.exemple", &contactGroup),
+					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
+					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
 				),
 			},
 		},
 	})
 }
 
-func TestAccStatusCakeContactGroup_withUpdate(t *testing.T) {
+func TestAccStatusCakeContactGroupWithUpdate(t *testing.T) {
 	var contactGroup statuscake.ContactGroup
 
 	resource.Test(t, resource.TestCase{
@@ -38,20 +38,20 @@ func TestAccStatusCakeContactGroup_withUpdate(t *testing.T) {
 		CheckDestroy: testAccContactGroupCheckDestroy(&contactGroup),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccContactGroupConfig_basic,
+				Config: testAccContactGroupConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccContactGroupCheckExists("statuscake_contact_group.exemple", &contactGroup),
-					testAccContactGroupCheckAttributes("statuscake_contact_group.exemple", &contactGroup),
+					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
+					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
 				),
 			},
 
 			{
-				Config: testAccContactGroupConfig_update,
+				Config: testAccContactGroupConfigUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					testAccContactGroupCheckExists("statuscake_contact_group.exemple", &contactGroup),
-					testAccContactGroupCheckAttributes("statuscake_contact_group.exemple", &contactGroup),
-					resource.TestCheckResourceAttr("statuscake_contact_group.exemple", "group_name", "group"),
-					resource.TestCheckResourceAttr("statuscake_contact_group.exemple", "ping_url", "https"),
+					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
+					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
+					resource.TestCheckResourceAttr("statuscake_contact_group.example", "group_name", "group"),
+					resource.TestCheckResourceAttr("statuscake_contact_group.example", "ping_url", "https"),
 				),
 			},
 		},
@@ -66,15 +66,15 @@ func testAccContactGroupCheckExists(rn string, contactGroup *statuscake.ContactG
 		}
 
 		if rs.Primary.ID == "" {
-			return fmt.Errorf("ContactGroupID not set")
+			return fmt.Errorf("contact_group.id not set")
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
-		contactGroupId, _ := strconv.Atoi(rs.Primary.ID)
+		contactGroupID, _ := strconv.Atoi(rs.Primary.ID)
 
-		gotContactGroup, err := statuscake.NewContactGroups(client).Detail(contactGroupId)
+		gotContactGroup, err := statuscake.NewContactGroups(client).Detail(contactGroupID)
 		if err != nil {
-			return fmt.Errorf("error getting ContactGroup: %s", err)
+			return fmt.Errorf("error getting contact_group: %w", err)
 		}
 
 		*contactGroup = *gotContactGroup
@@ -141,16 +141,16 @@ func testAccContactGroupCheckDestroy(contactGroup *statuscake.ContactGroup) reso
 	}
 }
 
-const testAccContactGroupConfig_basic = `
-resource "statuscake_contact_group" "exemple" {
+const testAccContactGroupConfigBasic = `
+resource "statuscake_contact_group" "example" {
 	emails= ["aaa","bbb"]
         group_name= "groupname"
         ping_url= "http"
 }
 `
 
-const testAccContactGroupConfig_update = `
-resource "statuscake_contact_group" "exemple" {
+const testAccContactGroupConfigUpdate = `
+resource "statuscake_contact_group" "example" {
          emails= ["aaa","bbb","ccc"]
          group_name= "group"
          ping_url= "https"
