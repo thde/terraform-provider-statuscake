@@ -24,8 +24,8 @@ resource "statuscake_test" "google" {
 }
 
 resource "statuscake_ssl" "google" {
-	domain = "https://www.google.com"
-	contact_groups_c = "3,12"
+  domain = "https://www.google.com"
+  contact_groups_c = "3,12"
   checkrate = 3600
   alert_at = "18,71,344"
   alert_reminder = true
@@ -35,7 +35,7 @@ resource "statuscake_ssl" "google" {
 }
 
 resource "statuscake_contact_group" "example" {
-	emails= ["email1","email2"]
+  emails= ["email1","email2"]
   group_name= "group name"
   ping_url= "url"
 }
