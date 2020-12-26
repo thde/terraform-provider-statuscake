@@ -1,63 +1,53 @@
-Terraform Provider
-==================
+# StatusCake Terraform Provider
 
-- Website: https://www.terraform.io
-- [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
-- Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
+![tests](https://github.com/thde/terraform-provider-statuscake/workflows/test/badge.svg)
+![golangci-lint](https://github.com/thde/terraform-provider-statuscake/workflows/golangci-lint/badge.svg)
 
-<img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
+## Requirements
 
-Requirements
-------------
+- [Terraform](https://www.terraform.io/downloads.html) 0.13.x
+- [Go](https://golang.org/doc/install) 1.12 (to build the provider plugin)
 
--	[Terraform](https://www.terraform.io/downloads.html) 0.10.x
--	[Go](https://golang.org/doc/install) 1.11 (to build the provider plugin)
+## Using the provider
 
-Building The Provider
----------------------
+The latest Docs can be found on the [Terraform Registry](https://registry.terraform.io/providers/thde/statuscake/latest/docs).
 
-Clone repository to: `$GOPATH/src/github.com/terraform-providers/terraform-provider-statuscake`
+```hcl
+terraform {
+  required_providers {
+    statuscake = {
+      source = "thde/statuscake"
+      version = "A.B.C"
+    }
+  }
+}
 
-```sh
-$ mkdir -p $GOPATH/src/github.com/terraform-providers; cd $GOPATH/src/github.com/terraform-providers
-$ git clone git@github.com:terraform-providers/terraform-provider-statuscake
+provider "statuscake" {
+  # Configuration options
+}
 ```
 
-Enter the provider directory and build the provider
+## Developing the Provider
+
+If you wish to work on the provider, you'll first need [Go](http://www.golang.org).
+
+### Build
 
 ```sh
-$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-statuscake
+$ cd terraform-provider-statuscake
 $ make build
 ```
 
-Using the provider
-----------------------
-## Fill in for each provider
-
-Developing the Provider
----------------------------
-
-If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (version 1.11+ is *required*). You'll also need to correctly setup a [GOPATH](http://golang.org/doc/code.html#GOPATH), as well as adding `$GOPATH/bin` to your `$PATH`.
-
-To compile the provider, run `make build`. This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
+### Tests
 
 ```sh
-$ make bin
-...
-$ $GOPATH/bin/terraform-provider-statuscake
-...
-```
-
-In order to test the provider, you can simply run `make test`.
-
-```sh
+$ cd terraform-provider-statuscake
 $ make test
 ```
 
-In order to run the full suite of Acceptance tests, run `make testacc`.
-
-*Note:* Acceptance tests create real resources, and often cost money to run.
+### Lint
 
 ```sh
-$ make testacc
+$ cd terraform-provider-statuscake
+$ make lint
 ```
