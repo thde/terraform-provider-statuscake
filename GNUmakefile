@@ -6,7 +6,7 @@ default: build
 lint:
 	golangci-lint run
 
-build: lint
+build:
 	go install
 
 test:
