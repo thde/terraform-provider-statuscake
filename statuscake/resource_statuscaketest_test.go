@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-func TestAccStatusCake_basic(t *testing.T) {
+func TestAccStatusCakeBasic(t *testing.T) {
 	var test statuscake.Test
 
 	resource.Test(t, resource.TestCase{
@@ -30,7 +30,7 @@ func TestAccStatusCake_basic(t *testing.T) {
 	})
 }
 
-func TestAccStatusCake_basic_deprecated_contact_ID(t *testing.T) {
+func TestAccStatusCakeBasic_deprecated_contact_ID(t *testing.T) {
 	var test statuscake.Test
 
 	resource.Test(t, resource.TestCase{
@@ -68,7 +68,7 @@ func TestAccStatusCake_tcp(t *testing.T) {
 	})
 }
 
-func TestAccStatusCake_withUpdate(t *testing.T) {
+func TestAccStatusCakeWithUpdate(t *testing.T) {
 	var test statuscake.Test
 
 	resource.Test(t, resource.TestCase{

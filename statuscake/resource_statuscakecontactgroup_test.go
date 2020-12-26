@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-func TestAccStatusCakeContactGroup_basic(t *testing.T) {
+func TestAccStatusCakeContactGroupBasic(t *testing.T) {
 	var contactGroup statuscake.ContactGroup
 
 	resource.Test(t, resource.TestCase{
@@ -29,7 +29,7 @@ func TestAccStatusCakeContactGroup_basic(t *testing.T) {
 	})
 }
 
-func TestAccStatusCakeContactGroup_withUpdate(t *testing.T) {
+func TestAccStatusCakeContactGroupWithUpdate(t *testing.T) {
 	var contactGroup statuscake.ContactGroup
 
 	resource.Test(t, resource.TestCase{

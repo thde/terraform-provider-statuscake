@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-func TestAccStatusCakeSsl_basic(t *testing.T) {
+func TestAccStatusCakeSslBasic(t *testing.T) {
 	var ssl statuscake.Ssl
 
 	resource.Test(t, resource.TestCase{
@@ -30,7 +30,7 @@ func TestAccStatusCakeSsl_basic(t *testing.T) {
 	})
 }
 
-func TestAccStatusCakeSsl_withUpdate(t *testing.T) {
+func TestAccStatusCakeSslWithUpdate(t *testing.T) {
 	var ssl statuscake.Ssl
 
 	resource.Test(t, resource.TestCase{
