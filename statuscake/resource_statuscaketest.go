@@ -22,9 +22,9 @@ func castSetToSliceStrings(configured []interface{}) []string {
 func considerEmptyStringAsEmptyArray(in []string) []string {
 	if len(in) == 1 && in[0] == "" {
 		return []string{}
-	} else {
-		return in
 	}
+
+	return in
 }
 
 func resourceStatusCakeTest() *schema.Resource {
