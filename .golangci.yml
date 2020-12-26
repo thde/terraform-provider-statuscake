@@ -8,7 +8,7 @@ linters:
     - dupl
     - errcheck
     - exhaustive
-    - funlen
+    #- funlen
     - gochecknoinits
     - goconst
     - gocritic
@@ -23,7 +23,7 @@ linters:
     - govet
     - ineffassign
     - interfacer
-    - lll
+    #- lll
     - misspell
     - nakedret
     - noctx
@@ -39,7 +39,6 @@ linters:
     - unused
     - varcheck
     - whitespace
-  # don't enable:
   # - asciicheck
   # - gochecknoglobals
   # - gocognit
