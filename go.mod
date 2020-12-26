@@ -1,4 +1,4 @@
-module github.com/terraform-providers/terraform-provider-statuscake
+module github.com/thde/terraform-provider-statuscake
 
 go 1.12
 

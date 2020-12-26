@@ -2,10 +2,11 @@ package main
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/plugin"
-	"github.com/terraform-providers/terraform-provider-statuscake/statuscake"
+	"github.com/thde/terraform-provider-statuscake/statuscake"
 )
 
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
-		ProviderFunc: statuscake.Provider})
+		ProviderFunc: statuscake.Provider,
+	})
 }
