@@ -20,7 +20,7 @@ func TestAccStatusCake_basic(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_basic),
+				Config: interpolateTerraformTemplate(testAccTestConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -39,7 +39,7 @@ func TestAccStatusCake_basic_deprecated_contact_ID(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_deprecated),
+				Config: interpolateTerraformTemplate(testAccTestConfigDeprecated),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -58,7 +58,7 @@ func TestAccStatusCake_tcp(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_tcp),
+				Config: interpolateTerraformTemplate(testAccTestConfigTCP),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -77,14 +77,14 @@ func TestAccStatusCake_withUpdate(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_basic),
+				Config: interpolateTerraformTemplate(testAccTestConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 				),
 			},
 
 			{
-				Config: testAccTestConfig_update,
+				Config: testAccTestConfigUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -249,7 +249,7 @@ func interpolateTerraformTemplate(template string) string {
 	return fmt.Sprintf(template, testContactGroupId)
 }
 
-const testAccTestConfig_basic = `
+const testAccTestConfigBasic = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
@@ -261,7 +261,8 @@ resource "statuscake_test" "google" {
 	trigger_rate = 10
 }
 `
-const testAccTestConfig_deprecated = `
+
+const testAccTestConfigDeprecated = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
@@ -273,7 +274,8 @@ resource "statuscake_test" "google" {
 	trigger_rate = 10
 }
 `
-const testAccTestConfig_update = `
+
+const testAccTestConfigUpdate = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
@@ -305,7 +307,7 @@ resource "statuscake_test" "google" {
 }
 `
 
-const testAccTestConfig_tcp = `
+const testAccTestConfigTCP = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
