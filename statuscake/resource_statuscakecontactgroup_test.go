@@ -21,8 +21,8 @@ func TestAccStatusCakeContactGroup_basic(t *testing.T) {
 			{
 				Config: testAccContactGroupConfig_basic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccContactGroupCheckExists("statuscake_contact_group.exemple", &contactGroup),
-					testAccContactGroupCheckAttributes("statuscake_contact_group.exemple", &contactGroup),
+					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
+					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
 				),
 			},
 		},
@@ -40,18 +40,18 @@ func TestAccStatusCakeContactGroup_withUpdate(t *testing.T) {
 			{
 				Config: testAccContactGroupConfig_basic,
 				Check: resource.ComposeTestCheckFunc(
-					testAccContactGroupCheckExists("statuscake_contact_group.exemple", &contactGroup),
-					testAccContactGroupCheckAttributes("statuscake_contact_group.exemple", &contactGroup),
+					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
+					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
 				),
 			},
 
 			{
 				Config: testAccContactGroupConfig_update,
 				Check: resource.ComposeTestCheckFunc(
-					testAccContactGroupCheckExists("statuscake_contact_group.exemple", &contactGroup),
-					testAccContactGroupCheckAttributes("statuscake_contact_group.exemple", &contactGroup),
-					resource.TestCheckResourceAttr("statuscake_contact_group.exemple", "group_name", "group"),
-					resource.TestCheckResourceAttr("statuscake_contact_group.exemple", "ping_url", "https"),
+					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
+					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
+					resource.TestCheckResourceAttr("statuscake_contact_group.example", "group_name", "group"),
+					resource.TestCheckResourceAttr("statuscake_contact_group.example", "ping_url", "https"),
 				),
 			},
 		},
@@ -142,7 +142,7 @@ func testAccContactGroupCheckDestroy(contactGroup *statuscake.ContactGroup) reso
 }
 
 const testAccContactGroupConfig_basic = `
-resource "statuscake_contact_group" "exemple" {
+resource "statuscake_contact_group" "example" {
 	emails= ["aaa","bbb"]
         group_name= "groupname"
         ping_url= "http"
@@ -150,7 +150,7 @@ resource "statuscake_contact_group" "exemple" {
 `
 
 const testAccContactGroupConfig_update = `
-resource "statuscake_contact_group" "exemple" {
+resource "statuscake_contact_group" "example" {
          emails= ["aaa","bbb","ccc"]
          group_name= "group"
          ping_url= "https"

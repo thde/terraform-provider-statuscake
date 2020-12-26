@@ -22,8 +22,8 @@ func TestAccStatusCakeSsl_basic(t *testing.T) {
 			{
 				Config: interpolateTerraformTemplateSsl(testAccSslConfig_basic),
 				Check: resource.ComposeTestCheckFunc(
-					testAccSslCheckExists("statuscake_ssl.exemple", &ssl),
-					testAccSslCheckAttributes("statuscake_ssl.exemple", &ssl),
+					testAccSslCheckExists("statuscake_ssl.example", &ssl),
+					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
 				),
 			},
 		},
@@ -41,24 +41,24 @@ func TestAccStatusCakeSsl_withUpdate(t *testing.T) {
 			{
 				Config: interpolateTerraformTemplateSsl(testAccSslConfig_basic),
 				Check: resource.ComposeTestCheckFunc(
-					testAccSslCheckExists("statuscake_ssl.exemple", &ssl),
-					testAccSslCheckAttributes("statuscake_ssl.exemple", &ssl),
+					testAccSslCheckExists("statuscake_ssl.example", &ssl),
+					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
 				),
 			},
 
 			{
 				Config: testAccSslConfig_update,
 				Check: resource.ComposeTestCheckFunc(
-					testAccSslCheckExists("statuscake_ssl.exemple", &ssl),
-					testAccSslCheckAttributes("statuscake_ssl.exemple", &ssl),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "checkrate", "86400"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "domain", "https://www.exemple.com"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "contact_groups_c", ""),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_at", "18,81,2019"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_reminder", "false"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_expiry", "false"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_broken", "true"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_mixed", "false"),
+					testAccSslCheckExists("statuscake_ssl.example", &ssl),
+					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "checkrate", "86400"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "domain", "https://www.example.com"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "contact_groups_c", ""),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_at", "18,81,2019"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_reminder", "false"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_expiry", "false"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_broken", "true"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_mixed", "false"),
 				),
 			},
 		},
@@ -199,8 +199,8 @@ func interpolateTerraformTemplateSsl(template string) string {
 }
 
 const testAccSslConfig_basic = `
-resource "statuscake_ssl" "exemple" {
-	domain = "https://www.exemple.com"
+resource "statuscake_ssl" "example" {
+	domain = "https://www.example.com"
 	contact_groups_c = "%s"
         checkrate = 3600
         alert_at = "18,71,2019"
@@ -212,8 +212,8 @@ resource "statuscake_ssl" "exemple" {
 `
 
 const testAccSslConfig_update = `
-resource "statuscake_ssl" "exemple" {
-	domain = "https://www.exemple.com"
+resource "statuscake_ssl" "example" {
+	domain = "https://www.example.com"
         contact_groups_c = ""
         checkrate = 86400
         alert_at = "18,81,2019"
