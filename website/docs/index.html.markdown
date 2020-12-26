@@ -1,7 +1,7 @@
 ---
-layout: "statuscake"
-page_title: "Provider: StatusCake"
-sidebar_current: "docs-statuscake-index"
+layout: 'statuscake'
+page_title: 'Provider: StatusCake'
+sidebar_current: 'docs-statuscake-index'
 description: |-
 
   The StatusCake provider configures tests and contact groups in StatusCake.
@@ -14,11 +14,11 @@ monitor the uptime of your service via a network of monitoring centers throughou
 
 The provider configuration block accepts the following arguments:
 
-* ``username`` - (Required) The username for the statuscake account. May alternatively be set via the
-  ``STATUSCAKE_USERNAME`` environment variable.
+- `username` - (Required) The username for the statuscake account. May alternatively be set via the
+  `STATUSCAKE_USERNAME` environment variable.
 
-* ``apikey`` - (Required) The API auth token to use when making requests. May alternatively
-  be set via the ``STATUSCAKE_APIKEY`` environment variable.
+- `apikey` - (Required) The API auth token to use when making requests. May alternatively
+  be set via the `STATUSCAKE_APIKEY` environment variable.
 
 Use the navigation to the left to read about the available resources.
 
@@ -52,7 +52,7 @@ resource "statuscake_ssl" "google" {
 
 =======
 >>>>>>> master
-resource "statuscake_contact_group" "exemple" {
+resource "statuscake_contact_group" "example" {
 	emails= ["email1","email2"]
         group_name= "group name"
         ping_url= "url"

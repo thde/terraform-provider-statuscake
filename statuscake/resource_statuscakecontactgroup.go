@@ -2,7 +2,6 @@ package statuscake
 
 import (
 	"fmt"
-
 	"log"
 	"strconv"
 
@@ -10,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 )
 
+//nolint:errcheck
 func resourceStatusCakeContactGroup() *schema.Resource {
 	return &schema.Resource{
 		Create: CreateContactGroup,
@@ -58,6 +58,7 @@ func resourceStatusCakeContactGroup() *schema.Resource {
 	}
 }
 
+//nolint:errcheck
 func CreateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
@@ -75,7 +76,7 @@ func CreateContactGroup(d *schema.ResourceData, meta interface{}) error {
 
 	response, err := statuscake.NewContactGroups(client).Create(newContactGroup)
 	if err != nil {
-		return fmt.Errorf("Error creating StatusCake ContactGroup: %s", err.Error())
+		return fmt.Errorf("error creating statuscake contact group: %w", err)
 	}
 
 	d.Set("mobiles", newContactGroup.Mobiles)
@@ -88,6 +89,7 @@ func CreateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	return ReadContactGroup(d, meta)
 }
 
+//nolint:errcheck
 func UpdateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
@@ -108,7 +110,7 @@ func UpdateContactGroup(d *schema.ResourceData, meta interface{}) error {
 	d.Set("pushover", params.Pushover)
 	d.Set("desktop_alert", params.DesktopAlert)
 	if err != nil {
-		return fmt.Errorf("Error Updating StatusCake ContactGroup: %s", err.Error())
+		return fmt.Errorf("error updating statuscake contact group: %w", err)
 	}
 	return ReadContactGroup(d, meta)
 }
@@ -122,12 +124,13 @@ func DeleteContactGroup(d *schema.ResourceData, meta interface{}) error {
 	return err
 }
 
+//nolint:errcheck
 func ReadContactGroup(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 	id, _ := strconv.Atoi(d.Id())
 	response, err := statuscake.NewContactGroups(client).Detail(id)
 	if err != nil {
-		return fmt.Errorf("Error Getting StatusCake ContactGroup Details for %s: Error: %s", d.Id(), err)
+		return fmt.Errorf("error getting statuscake contact group details for %s: Error: %w", d.Id(), err)
 	}
 	d.Set("group_name", response.GroupName)
 	d.Set("emails", response.Emails)

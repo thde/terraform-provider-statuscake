@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-func TestAccStatusCake_basic(t *testing.T) {
+func TestAccStatusCakeBasic(t *testing.T) {
 	var test statuscake.Test
 
 	resource.Test(t, resource.TestCase{
@@ -20,7 +20,7 @@ func TestAccStatusCake_basic(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_basic),
+				Config: interpolateTerraformTemplate(testAccTestConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -30,7 +30,7 @@ func TestAccStatusCake_basic(t *testing.T) {
 	})
 }
 
-func TestAccStatusCake_basic_deprecated_contact_ID(t *testing.T) {
+func TestAccStatusCakeBasic_deprecated_contact_ID(t *testing.T) {
 	var test statuscake.Test
 
 	resource.Test(t, resource.TestCase{
@@ -39,7 +39,7 @@ func TestAccStatusCake_basic_deprecated_contact_ID(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_deprecated),
+				Config: interpolateTerraformTemplate(testAccTestConfigDeprecated),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -58,7 +58,7 @@ func TestAccStatusCake_tcp(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_tcp),
+				Config: interpolateTerraformTemplate(testAccTestConfigTCP),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -68,7 +68,7 @@ func TestAccStatusCake_tcp(t *testing.T) {
 	})
 }
 
-func TestAccStatusCake_withUpdate(t *testing.T) {
+func TestAccStatusCakeWithUpdate(t *testing.T) {
 	var test statuscake.Test
 
 	resource.Test(t, resource.TestCase{
@@ -77,14 +77,14 @@ func TestAccStatusCake_withUpdate(t *testing.T) {
 		CheckDestroy: testAccTestCheckDestroy(&test),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplate(testAccTestConfig_basic),
+				Config: interpolateTerraformTemplate(testAccTestConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 				),
 			},
 
 			{
-				Config: testAccTestConfig_update,
+				Config: testAccTestConfigUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					testAccTestCheckExists("statuscake_test.google", &test),
 					testAccTestCheckAttributes("statuscake_test.google", &test),
@@ -134,14 +134,14 @@ func testAccTestCheckExists(rn string, test *statuscake.Test) resource.TestCheck
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
-		testId, parseErr := strconv.Atoi(rs.Primary.ID)
+		testID, parseErr := strconv.Atoi(rs.Primary.ID)
 		if parseErr != nil {
-			return fmt.Errorf("error in statuscake test CheckExists: %s", parseErr)
+			return fmt.Errorf("error in statuscake test CheckExists: %w", parseErr)
 		}
 
-		gotTest, err := client.Tests().Detail(testId)
+		gotTest, err := client.Tests().Detail(testID)
 		if err != nil {
-			return fmt.Errorf("error getting test: %s", err)
+			return fmt.Errorf("error getting test: %w", err)
 		}
 
 		*test = *gotTest
@@ -240,16 +240,16 @@ func testAccTestCheckDestroy(test *statuscake.Test) resource.TestCheckFunc {
 }
 
 func interpolateTerraformTemplate(template string) string {
-	testContactGroupId := "43402"
+	testContactGroupID := "43402"
 
 	if v := os.Getenv("STATUSCAKE_TEST_CONTACT_GROUP_ID"); v != "" {
-		testContactGroupId = v
+		testContactGroupID = v
 	}
 
-	return fmt.Sprintf(template, testContactGroupId)
+	return fmt.Sprintf(template, testContactGroupID)
 }
 
-const testAccTestConfig_basic = `
+const testAccTestConfigBasic = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
@@ -261,7 +261,8 @@ resource "statuscake_test" "google" {
 	trigger_rate = 10
 }
 `
-const testAccTestConfig_deprecated = `
+
+const testAccTestConfigDeprecated = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
@@ -273,7 +274,8 @@ resource "statuscake_test" "google" {
 	trigger_rate = 10
 }
 `
-const testAccTestConfig_update = `
+
+const testAccTestConfigUpdate = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"
@@ -305,7 +307,7 @@ resource "statuscake_test" "google" {
 }
 `
 
-const testAccTestConfig_tcp = `
+const testAccTestConfigTCP = `
 resource "statuscake_test" "google" {
 	website_name = "google.com"
 	website_url = "www.google.com"

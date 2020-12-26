@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-func TestAccStatusCakeSsl_basic(t *testing.T) {
+func TestAccStatusCakeSslBasic(t *testing.T) {
 	var ssl statuscake.Ssl
 
 	resource.Test(t, resource.TestCase{
@@ -20,17 +20,17 @@ func TestAccStatusCakeSsl_basic(t *testing.T) {
 		CheckDestroy: testAccSslCheckDestroy(&ssl),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplateSsl(testAccSslConfig_basic),
+				Config: interpolateTerraformTemplateSsl(testAccSslConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
-					testAccSslCheckExists("statuscake_ssl.exemple", &ssl),
-					testAccSslCheckAttributes("statuscake_ssl.exemple", &ssl),
+					testAccSslCheckExists("statuscake_ssl.example", &ssl),
+					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
 				),
 			},
 		},
 	})
 }
 
-func TestAccStatusCakeSsl_withUpdate(t *testing.T) {
+func TestAccStatusCakeSslWithUpdate(t *testing.T) {
 	var ssl statuscake.Ssl
 
 	resource.Test(t, resource.TestCase{
@@ -39,26 +39,26 @@ func TestAccStatusCakeSsl_withUpdate(t *testing.T) {
 		CheckDestroy: testAccSslCheckDestroy(&ssl),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplateSsl(testAccSslConfig_basic),
+				Config: interpolateTerraformTemplateSsl(testAccSslConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
-					testAccSslCheckExists("statuscake_ssl.exemple", &ssl),
-					testAccSslCheckAttributes("statuscake_ssl.exemple", &ssl),
+					testAccSslCheckExists("statuscake_ssl.example", &ssl),
+					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
 				),
 			},
 
 			{
-				Config: testAccSslConfig_update,
+				Config: testAccSslConfigUpdate,
 				Check: resource.ComposeTestCheckFunc(
-					testAccSslCheckExists("statuscake_ssl.exemple", &ssl),
-					testAccSslCheckAttributes("statuscake_ssl.exemple", &ssl),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "checkrate", "86400"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "domain", "https://www.exemple.com"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "contact_groups_c", ""),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_at", "18,81,2019"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_reminder", "false"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_expiry", "false"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_broken", "true"),
-					resource.TestCheckResourceAttr("statuscake_ssl.exemple", "alert_mixed", "false"),
+					testAccSslCheckExists("statuscake_ssl.example", &ssl),
+					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "checkrate", "86400"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "domain", "https://www.example.com"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "contact_groups_c", ""),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_at", "18,81,2019"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_reminder", "false"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_expiry", "false"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_broken", "true"),
+					resource.TestCheckResourceAttr("statuscake_ssl.example", "alert_mixed", "false"),
 				),
 			},
 		},
@@ -73,15 +73,15 @@ func testAccSslCheckExists(rn string, ssl *statuscake.Ssl) resource.TestCheckFun
 		}
 
 		if rs.Primary.ID == "" {
-			return fmt.Errorf("SslID not set")
+			return fmt.Errorf("ssl ID not set")
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
-		sslId := rs.Primary.ID
+		sslID := rs.Primary.ID
 
-		gotSsl, err := statuscake.NewSsls(client).Detail(sslId)
+		gotSsl, err := statuscake.NewSsls(client).Detail(sslID)
 		if err != nil {
-			return fmt.Errorf("error getting ssl: %s", err)
+			return fmt.Errorf("error getting ssl: %w", err)
 		}
 		gotSsl.LastUpdatedUtc = "0000-00-00 00:00:00" // quick fix to avoid issue with it because the state is updated before the value change but it is changed when gotSsl is created
 		*ssl = *gotSsl
@@ -186,21 +186,21 @@ func testAccSslCheckDestroy(ssl *statuscake.Ssl) resource.TestCheckFunc {
 }
 
 func interpolateTerraformTemplateSsl(template string) string {
-	sslContactGroupId := "43402"
+	sslContactGroupID := "43402"
 
 	if v := os.Getenv("STATUSCAKE_SSL_CONTACT_GROUP_ID"); v != "" {
-		sslContactGroupId = v
+		sslContactGroupID = v
 	}
-	if sslContactGroupId == "-1" {
-		sslContactGroupId = ""
+	if sslContactGroupID == "-1" {
+		sslContactGroupID = ""
 	}
 
-	return fmt.Sprintf(template, sslContactGroupId)
+	return fmt.Sprintf(template, sslContactGroupID)
 }
 
-const testAccSslConfig_basic = `
-resource "statuscake_ssl" "exemple" {
-	domain = "https://www.exemple.com"
+const testAccSslConfigBasic = `
+resource "statuscake_ssl" "example" {
+	domain = "https://www.example.com"
 	contact_groups_c = "%s"
         checkrate = 3600
         alert_at = "18,71,2019"
@@ -211,9 +211,9 @@ resource "statuscake_ssl" "exemple" {
 }
 `
 
-const testAccSslConfig_update = `
-resource "statuscake_ssl" "exemple" {
-	domain = "https://www.exemple.com"
+const testAccSslConfigUpdate = `
+resource "statuscake_ssl" "example" {
+	domain = "https://www.example.com"
         contact_groups_c = ""
         checkrate = 86400
         alert_at = "18,81,2019"
