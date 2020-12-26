@@ -31,5 +31,3 @@ jobs:
           go-version: 1.14
       - name: Website Test
         run: make website-test
-        env:
-          GOPATH: $HOME
