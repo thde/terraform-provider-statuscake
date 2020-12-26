@@ -240,13 +240,13 @@ func testAccTestCheckDestroy(test *statuscake.Test) resource.TestCheckFunc {
 }
 
 func interpolateTerraformTemplate(template string) string {
-	testContactGroupId := "43402"
+	testContactGroupID := "43402"
 
 	if v := os.Getenv("STATUSCAKE_TEST_CONTACT_GROUP_ID"); v != "" {
-		testContactGroupId = v
+		testContactGroupID = v
 	}
 
-	return fmt.Sprintf(template, testContactGroupId)
+	return fmt.Sprintf(template, testContactGroupID)
 }
 
 const testAccTestConfigBasic = `

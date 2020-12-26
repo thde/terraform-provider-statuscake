@@ -195,7 +195,7 @@ func UpdateSsl(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[DEBUG] StatusCake Ssl Update for %s", d.Id())
 	_, err := statuscake.NewSsls(client).Update(params)
 	if err != nil {
-		return fmt.Errorf("Error Updating StatusCake Ssl: %s", err.Error())
+		return fmt.Errorf("error updating statuscake ssl: %w", err)
 	}
 	return nil
 }
@@ -244,12 +244,12 @@ func ReadSsl(d *schema.ResourceData, meta interface{}) error {
 }
 
 func getStatusCakeSslInput(d *schema.ResourceData) *statuscake.PartialSsl {
-	sslId, parseErr := strconv.Atoi(d.Id())
+	sslID, parseErr := strconv.Atoi(d.Id())
 	if parseErr != nil {
 		log.Printf("[DEBUG] Error Parsing StatusCake Id: %s", d.Id())
 	}
 	ssl := &statuscake.PartialSsl{
-		ID: sslId,
+		ID: sslID,
 	}
 
 	if v, ok := d.GetOk("domain"); ok {

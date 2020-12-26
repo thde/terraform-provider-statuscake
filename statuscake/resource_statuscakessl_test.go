@@ -20,7 +20,7 @@ func TestAccStatusCakeSsl_basic(t *testing.T) {
 		CheckDestroy: testAccSslCheckDestroy(&ssl),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplateSsl(testAccSslConfig_basic),
+				Config: interpolateTerraformTemplateSsl(testAccSslConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
 					testAccSslCheckExists("statuscake_ssl.example", &ssl),
 					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
@@ -39,7 +39,7 @@ func TestAccStatusCakeSsl_withUpdate(t *testing.T) {
 		CheckDestroy: testAccSslCheckDestroy(&ssl),
 		Steps: []resource.TestStep{
 			{
-				Config: interpolateTerraformTemplateSsl(testAccSslConfig_basic),
+				Config: interpolateTerraformTemplateSsl(testAccSslConfigBasic),
 				Check: resource.ComposeTestCheckFunc(
 					testAccSslCheckExists("statuscake_ssl.example", &ssl),
 					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
@@ -47,7 +47,7 @@ func TestAccStatusCakeSsl_withUpdate(t *testing.T) {
 			},
 
 			{
-				Config: testAccSslConfig_update,
+				Config: testAccSslConfigUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					testAccSslCheckExists("statuscake_ssl.example", &ssl),
 					testAccSslCheckAttributes("statuscake_ssl.example", &ssl),
@@ -77,9 +77,9 @@ func testAccSslCheckExists(rn string, ssl *statuscake.Ssl) resource.TestCheckFun
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
-		sslId := rs.Primary.ID
+		sslID := rs.Primary.ID
 
-		gotSsl, err := statuscake.NewSsls(client).Detail(sslId)
+		gotSsl, err := statuscake.NewSsls(client).Detail(sslID)
 		if err != nil {
 			return fmt.Errorf("error getting ssl: %w", err)
 		}
@@ -186,19 +186,19 @@ func testAccSslCheckDestroy(ssl *statuscake.Ssl) resource.TestCheckFunc {
 }
 
 func interpolateTerraformTemplateSsl(template string) string {
-	sslContactGroupId := "43402"
+	sslContactGroupID := "43402"
 
 	if v := os.Getenv("STATUSCAKE_SSL_CONTACT_GROUP_ID"); v != "" {
-		sslContactGroupId = v
+		sslContactGroupID = v
 	}
-	if sslContactGroupId == "-1" {
-		sslContactGroupId = ""
+	if sslContactGroupID == "-1" {
+		sslContactGroupID = ""
 	}
 
-	return fmt.Sprintf(template, sslContactGroupId)
+	return fmt.Sprintf(template, sslContactGroupID)
 }
 
-const testAccSslConfig_basic = `
+const testAccSslConfigBasic = `
 resource "statuscake_ssl" "example" {
 	domain = "https://www.example.com"
 	contact_groups_c = "%s"
@@ -211,7 +211,7 @@ resource "statuscake_ssl" "example" {
 }
 `
 
-const testAccSslConfig_update = `
+const testAccSslConfigUpdate = `
 resource "statuscake_ssl" "example" {
 	domain = "https://www.example.com"
         contact_groups_c = ""
