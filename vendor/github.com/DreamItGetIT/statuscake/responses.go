@@ -70,9 +70,9 @@ type detailResponse struct {
 }
 
 func (d *detailResponse) test() *Test {
-	contactGroupIds := make([]string, len(d.ContactGroups))
+	contactGroupIDs := make([]string, len(d.ContactGroups))
 	for i, v := range d.ContactGroups {
-		contactGroupIds[i] = strconv.Itoa(v.ID)
+		contactGroupIDs[i] = strconv.Itoa(v.ID)
 	}
 
 	return &Test{
@@ -84,7 +84,7 @@ func (d *detailResponse) test() *Test {
 		CustomHeader:   d.CustomHeader,
 		UserAgent:      d.UserAgent,
 		ContactID:      d.ContactID,
-		ContactGroup:   contactGroupIds,
+		ContactGroup:   contactGroupIDs,
 		Status:         d.Status,
 		Uptime:         d.Uptime,
 		CheckRate:      d.CheckRate,

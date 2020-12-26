@@ -19,7 +19,7 @@ func TestAccStatusCakeContactGroup_basic(t *testing.T) {
 		CheckDestroy: testAccContactGroupCheckDestroy(&contactGroup),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccContactGroupConfig_basic,
+				Config: testAccContactGroupConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
 					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
 					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
@@ -38,7 +38,7 @@ func TestAccStatusCakeContactGroup_withUpdate(t *testing.T) {
 		CheckDestroy: testAccContactGroupCheckDestroy(&contactGroup),
 		Steps: []resource.TestStep{
 			{
-				Config: testAccContactGroupConfig_basic,
+				Config: testAccContactGroupConfigBasic,
 				Check: resource.ComposeTestCheckFunc(
 					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
 					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
@@ -46,7 +46,7 @@ func TestAccStatusCakeContactGroup_withUpdate(t *testing.T) {
 			},
 
 			{
-				Config: testAccContactGroupConfig_update,
+				Config: testAccContactGroupConfigUpdate,
 				Check: resource.ComposeTestCheckFunc(
 					testAccContactGroupCheckExists("statuscake_contact_group.example", &contactGroup),
 					testAccContactGroupCheckAttributes("statuscake_contact_group.example", &contactGroup),
@@ -70,9 +70,9 @@ func testAccContactGroupCheckExists(rn string, contactGroup *statuscake.ContactG
 		}
 
 		client := testAccProvider.Meta().(*statuscake.Client)
-		contactGroupId, _ := strconv.Atoi(rs.Primary.ID)
+		contactGroupID, _ := strconv.Atoi(rs.Primary.ID)
 
-		gotContactGroup, err := statuscake.NewContactGroups(client).Detail(contactGroupId)
+		gotContactGroup, err := statuscake.NewContactGroups(client).Detail(contactGroupID)
 		if err != nil {
 			return fmt.Errorf("error getting ContactGroup: %s", err)
 		}
@@ -141,7 +141,7 @@ func testAccContactGroupCheckDestroy(contactGroup *statuscake.ContactGroup) reso
 	}
 }
 
-const testAccContactGroupConfig_basic = `
+const testAccContactGroupConfigBasic = `
 resource "statuscake_contact_group" "example" {
 	emails= ["aaa","bbb"]
         group_name= "groupname"
@@ -149,7 +149,7 @@ resource "statuscake_contact_group" "example" {
 }
 `
 
-const testAccContactGroupConfig_update = `
+const testAccContactGroupConfigUpdate = `
 resource "statuscake_contact_group" "example" {
          emails= ["aaa","bbb","ccc"]
          group_name= "group"

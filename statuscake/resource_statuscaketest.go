@@ -2,9 +2,8 @@ package statuscake
 
 import (
 	"fmt"
-	"strconv"
-
 	"log"
+	"strconv"
 
 	"github.com/DreamItGetIT/statuscake"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
@@ -307,12 +306,12 @@ func UpdateTest(d *schema.ResourceData, meta interface{}) error {
 func DeleteTest(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
-	testId, parseErr := strconv.Atoi(d.Id())
+	testID, parseErr := strconv.Atoi(d.Id())
 	if parseErr != nil {
 		return parseErr
 	}
 	log.Printf("[DEBUG] Deleting StatusCake Test: %s", d.Id())
-	err := client.Tests().Delete(testId)
+	err := client.Tests().Delete(testID)
 	if err != nil {
 		return err
 	}
@@ -323,11 +322,11 @@ func DeleteTest(d *schema.ResourceData, meta interface{}) error {
 func ReadTest(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*statuscake.Client)
 
-	testId, parseErr := strconv.Atoi(d.Id())
+	testID, parseErr := strconv.Atoi(d.Id())
 	if parseErr != nil {
 		return parseErr
 	}
-	testResp, err := client.Tests().Detail(testId)
+	testResp, err := client.Tests().Detail(testID)
 	if err != nil {
 		return fmt.Errorf("Error Getting StatusCake Test Details for %s: Error: %s", d.Id(), err)
 	}
@@ -374,12 +373,12 @@ func ReadTest(d *schema.ResourceData, meta interface{}) error {
 }
 
 func getStatusCakeTestInput(d *schema.ResourceData) *statuscake.Test {
-	testId, parseErr := strconv.Atoi(d.Id())
+	testID, parseErr := strconv.Atoi(d.Id())
 	if parseErr != nil {
 		log.Printf("[DEBUG] Error Parsing StatusCake TestID: %s", d.Id())
 	}
 	test := &statuscake.Test{
-		TestID: testId,
+		TestID: testID,
 	}
 	if v, ok := d.GetOk("website_name"); ok {
 		test.WebsiteName = v.(string)

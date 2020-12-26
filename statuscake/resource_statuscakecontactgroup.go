@@ -2,7 +2,6 @@ package statuscake
 
 import (
 	"fmt"
-
 	"log"
 	"strconv"
 
@@ -127,7 +126,7 @@ func ReadContactGroup(d *schema.ResourceData, meta interface{}) error {
 	id, _ := strconv.Atoi(d.Id())
 	response, err := statuscake.NewContactGroups(client).Detail(id)
 	if err != nil {
-		return fmt.Errorf("Error Getting StatusCake ContactGroup Details for %s: Error: %s", d.Id(), err)
+		return fmt.Errorf("error getting statuscake contact group details for %s: Error: %s", d.Id(), err)
 	}
 	d.Set("group_name", response.GroupName)
 	d.Set("emails", response.Emails)
